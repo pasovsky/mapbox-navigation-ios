@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C36989524A4F55900E25A10 /* TopLevelFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C36989424A4F55900E25A10 /* TopLevelFeedbackViewController.swift */; };
 		1603C891214351EE00167D95 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1603C890214351EE00167D95 /* Cedar.framework */; };
 		160A4A712127A46C0028B070 /* CPBarButton+MBTestable.m in Sources */ = {isa = PBXBuildFile; fileRef = 160A4A69212791010028B070 /* CPBarButton+MBTestable.m */; };
 		160D8279205996DA00D278D6 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160D8278205996DA00D278D6 /* DataCache.swift */; };
@@ -631,6 +632,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C36989424A4F55900E25A10 /* TopLevelFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelFeedbackViewController.swift; sourceTree = "<group>"; };
 		1603C890214351EE00167D95 /* Cedar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cedar.framework; path = Carthage/Build/iOS/Cedar.framework; sourceTree = "<group>"; };
 		160A4A68212791010028B070 /* CPBarButton+MBTestable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPBarButton+MBTestable.h"; sourceTree = "<group>"; };
 		160A4A69212791010028B070 /* CPBarButton+MBTestable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CPBarButton+MBTestable.m"; sourceTree = "<group>"; };
@@ -1366,6 +1368,7 @@
 				353AA55F1FCEF583009F0384 /* StyleManager.swift */,
 				C5A6B2DC1F4CE8E8004260EA /* StyleType.swift */,
 				35B1E2941F1FF8EC00A13D32 /* UserCourseView.swift */,
+				0C36989424A4F55900E25A10 /* TopLevelFeedbackViewController.swift */,
 			);
 			path = MapboxNavigation;
 			sourceTree = "<group>";
@@ -2508,6 +2511,7 @@
 				35C9973F1E732C1B00544D1C /* RouteVoiceController.swift in Sources */,
 				C5F4D21920DC468B0059FABF /* CongestionLevel.swift in Sources */,
 				AE47A32B22B1F6AE0096458C /* InstructionsCardCell.swift in Sources */,
+				0C36989524A4F55900E25A10 /* TopLevelFeedbackViewController.swift in Sources */,
 				3597B9A42149B2C20021B0D9 /* UIViewController.swift in Sources */,
 				8D24A2FA20449B430098CBF8 /* Dictionary.swift in Sources */,
 				350E2C5F22707EB80014CEB3 /* UIScreen.swift in Sources */,
