@@ -24,7 +24,7 @@ extension NSAttributedString {
 }
 
 extension SpokenInstruction {
-    func attributedText(for legProgress: RouteLegProgress) -> NSAttributedString {
+    public func attributedText(for legProgress: RouteLegProgress) -> NSAttributedString {
         let attributedText = NSMutableAttributedString(string: text)
         if let step = legProgress.upcomingStep,
             let name = step.names?.first,
@@ -56,7 +56,7 @@ extension SpokenInstruction {
  If you need to supply a third-party speech synthesizer, define a subclass of `RouteVoiceController` that overrides the `speak(_:)` method. If the third-party speech synthesizer requires a network connection, you can instead subclass `MapboxVoiceController` to take advantage of its prefetching functionality.
  */
 open class RouteVoiceController: NSObject, AVSpeechSynthesizerDelegate {
-    lazy var speechSynth = AVSpeechSynthesizer()
+    public lazy var speechSynth = AVSpeechSynthesizer()
     
     let audioQueue = DispatchQueue(label: Bundle.mapboxNavigation.bundleIdentifier! + ".audio")
     
@@ -75,8 +75,8 @@ open class RouteVoiceController: NSObject, AVSpeechSynthesizerDelegate {
      */
     public weak var voiceControllerDelegate: VoiceControllerDelegate?
     
-    var lastSpokenInstruction: SpokenInstruction?
-    var routeProgress: RouteProgress?
+    public var lastSpokenInstruction: SpokenInstruction?
+    public var routeProgress: RouteProgress?
     
     /**
      Default initializer for `RouteVoiceController`.
@@ -159,7 +159,7 @@ open class RouteVoiceController: NSObject, AVSpeechSynthesizerDelegate {
     }
     
     typealias AudioControlFailureHandler = (SpeechError) -> Void
-    func safeDuckAudio(instruction: SpokenInstruction?, engine: Any?, failure: AudioControlFailureHandler) {
+    public func safeDuckAudio(instruction: SpokenInstruction?, engine: Any?, failure: AudioControlFailureHandler) {
         do {
             try tryDuckAudio()
         } catch {
