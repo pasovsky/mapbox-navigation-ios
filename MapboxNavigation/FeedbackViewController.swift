@@ -72,50 +72,10 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
     
     let interactor = Interactor()
 
-
-//    /**
-//     The feedback items that are visible and selectable by the user.
-//     */
-//    public var sections: [FeedbackItem] =  [FeedbackType.incorrectVisual(subtype: .none),
-//                                            FeedbackType.confusingAudio(subtype: .none),
-//                                            FeedbackType.illegalRoute(subtype: .none),
-//                                            FeedbackType.roadClosure(subtype: .none),
-//                                            FeedbackType.routeQuality(subtype: .none)].map { $0.generateFeedbackItem() }
-
     public weak var delegate: FeedbackViewControllerDelegate?
-    
-//    lazy var collectionView: UICollectionView = {
-//        let view: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .clear
-//        view.delegate = self
-//        view.dataSource = self
-//        view.register(FeedbackCollectionViewCell.self, forCellWithReuseIdentifier: FeedbackCollectionViewCell.defaultIdentifier)
-//        return view
-//    }()
-//
-//    lazy var reportIssueLabel: UILabel = {
-//        let label: UILabel = .forAutoLayout()
-//        label.textAlignment = .center
-//        label.text = FeedbackViewController.sceneTitle
-//        return label
-//    }()
-    
-//    lazy var flowLayout: UICollectionViewFlowLayout = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.minimumInteritemSpacing = 0.0
-//        layout.minimumLineSpacing = 0.0
-//        return layout
-//    }()
-    
+
     var draggableHeight: CGFloat {
-//        let numberOfRows = collectionView.numberOfRows(using: self)
-//        let padding = (flowLayout.sectionInset.top + flowLayout.sectionInset.bottom) * CGFloat(numberOfRows)
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        let collectionViewHeight = collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: indexPath).height * CGFloat(numberOfRows) + padding + view.safeArea.bottom
-//        let fullHeight = reportIssueLabel.bounds.height+collectionViewHeight
-//        return fullHeight
-        return self.topLevelFeedbackVC.draggableHeight
+        return topLevelFeedbackVC.draggableHeight
     }
     
     /**
@@ -153,16 +113,18 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
 
     var navController: UINavigationController!
     var topLevelFeedbackVC: TopLevelFeedbackViewController!
+    var feedbackDetailsVC: FeedbackDetailsViewController!
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-//        setupViews()
-//        setupConstraints()
         topLevelFeedbackVC = TopLevelFeedbackViewController(nibName: nil, bundle: nil)
-        topLevelFeedbackVC.send = { (item: FeedbackItem) -> Void in
-            self.send(item)
-        }
+        feedbackDetailsVC = FeedbackDetailsViewController(style: .plain)
         navController = UINavigationController(rootViewController: topLevelFeedbackVC)
+        topLevelFeedbackVC.send = { (item: FeedbackItem) -> Void in
+            self.feedbackDetailsVC.navigationItemTitle = item.title
+            self.feedbackDetailsVC.feedbackSubTypes = item.feedbackType.subtypes
+            self.navController.pushViewController(self.feedbackDetailsVC, animated: true)
+        }
 
         self.view.addSubview(navController.view)
 
@@ -170,7 +132,6 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
         transitioningDelegate = self
         view.backgroundColor = .white
         enableDraggableDismiss()
-
     }
     
     override public func viewDidAppear(_ animated: Bool) {
@@ -213,27 +174,6 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
     @objc func handleDismissTap(sender: UITapGestureRecognizer) {
         dismissFeedback()
     }
-    
-//    private func setupViews() {
-//        let children = [reportIssueLabel, collectionView]
-//        view.addSubviews(children)
-//    }
-//
-//    private func setupConstraints() {
-//        let labelTop = reportIssueLabel.topAnchor.constraint(equalTo: view.topAnchor)
-//        let labelHeight = reportIssueLabel.heightAnchor.constraint(equalToConstant: 30.0)
-//        let labelLeading = reportIssueLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-//        let labelTrailing = reportIssueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-//        let collectionLabelSpacing = collectionView.topAnchor.constraint(equalTo: reportIssueLabel.bottomAnchor)
-//        let collectionLeading = collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-//        let collectionTrailing = collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-//        let collectionBarSpacing = collectionView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
-//
-//        let constraints = [labelTop, labelHeight, labelLeading, labelTrailing,
-//                           collectionLabelSpacing, collectionLeading, collectionTrailing, collectionBarSpacing]
-//
-//        NSLayoutConstraint.activate(constraints)
-//    }
     
     func send(_ item: FeedbackItem) {
         if let uuid = self.uuid {

@@ -125,4 +125,3 @@ extension TopLevelFeedbackViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: cellHeight )
     }
 }
-
